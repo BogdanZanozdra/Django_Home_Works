@@ -39,7 +39,6 @@ def customer_products(request, customer_id, period_days):
     customer = get_object_or_404(Customer, pk=customer_id)
     orders = Order.objects.filter(customer=customer).order_by('date_order')
     products_dict = {}
-    product_orders = []
     for order in orders:
         if order.get_timedelta() <= period_days:
             for product in order.get_products():
