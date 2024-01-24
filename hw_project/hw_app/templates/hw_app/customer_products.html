@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer {{ customer.pk }} products</title>
+</head>
+<body>
+    <h1>Customer {{ customer.pk }} products:</h1>
+    {% for product, orders in products_dict.items %}
+        {{ product }} from {{ orders }}<br>
+    {% endfor %}
+</body>
+</html>

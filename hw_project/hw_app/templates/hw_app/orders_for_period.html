@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>customer {{ customer.pk }} orders</title>
+</head>
+<body>
+    <h1>Customer {{ customer.pk }} orders:</h1>
+    <h3>Orders for last {{ days }} days:</h3>
+     {% for order in orders %}
+        {% if order.get_timedelta <= days %}
+            {{ order }}<br>
+            {% for product in order.get_products %}
+                {{ product }}<br>
+            {% endfor %}
+            <br>
+        {% endif %}
+    {% endfor %}
+
+</body>
+</html>

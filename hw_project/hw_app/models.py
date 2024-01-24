@@ -25,7 +25,7 @@
 # ○ дата оформления заказа
 
 from django.db import models
-
+import datetime
 
 class Customer(models.Model):
     name = models.CharField(max_length=100)
@@ -48,6 +48,9 @@ class Product(models.Model):
     def __str__(self):
         return f'{self.product_name} price: {self.price}'
 
+    def get_orders(self, customer_id):
+        return list(Order.objects.filter(products__pk=self.pk, customer__pk=customer_id))
+
 
 class Order(models.Model):
     amount = models.DecimalField(max_digits=5, decimal_places=2)
@@ -55,5 +58,13 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product)
 
+    def get_products(self):
+        order_products = self.products.all()
+        return order_products
+
+    def get_timedelta(self):
+        delta = datetime.date.today() - self.date_order
+        return delta.days
+
     def __str__(self):
-        return f'Order: {self.customer}, date: {self.date_order}, amount: {self.amount}'
+        return f'Order:{self.pk} {self.customer}, date: {self.date_order}, amount: {self.amount}'

@@ -2,11 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>user orders</title>
+    <title>customer {{ customer.pk }} orders</title>
 </head>
 <body>
+    <h1>Customer {{ customer.pk }} orders:</h1>
      {% for order in orders %}
         {{ order }}<br>
+        {{ order.get_timedelta }}<br>
+        {% for product in order.get_products %}
+            {{ product }}<br>
+        {% endfor %}
     {% endfor %}
+
 </body>
 </html>
