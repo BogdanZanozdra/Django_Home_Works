@@ -27,6 +27,7 @@
 from django.db import models
 import datetime
 
+
 class Customer(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
@@ -44,6 +45,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2)
     count = models.IntegerField()
     adding_date = models.DateField(auto_now_add=True)
+    image = models.ImageField(upload_to='product/')
 
     def __str__(self):
         return f'{self.product_name} price: {self.price}'
