@@ -69,4 +69,4 @@ class Order(models.Model):
         return delta.days
 
     def __str__(self):
-        return f'Order:{self.pk} {self.customer}, date: {self.date_order}, amount: {self.amount}'
+        return f'Order id: {self.pk} {self.customer}, date: {self.date_order}, amount: {self.amount}'
